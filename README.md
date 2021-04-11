@@ -1,6 +1,10 @@
 # Market place
 _Group 2 software design project_
 
+## Documentation
+
+For our full documentation check out the project [Wiki](https://github.com/2109688/Market-place/wiki)
+
 ## Installing
 This system was built using JavaScript, HTML and CSS. 
 
