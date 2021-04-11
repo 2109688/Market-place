@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Sign-in Market place</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="./style.css">
+
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-storage.js"></script>
+    </head>
+    <body>
+        <main>
+            <form>
+                <h3 style="text-align: center;">Login</h3>
+                <label for="email">Email:</label><br>
+                <input placeholder="e.g: example@gmail.com" type="text" name="email" id="email"><br>
+                <label for="password">Password:</label><br>
+                <input placeholder="e.g: abcdef" type="password" name="password" id="password"><br>
+                <button type="button" class="btn waves-effect waves-light" onclick="login()">Login</button><br>
+                <a href="signup.html">Not have an account? Sign up</a>
+            </form>
+        </main>
+
+        <script src="index.js"></script>
+            <script>
+                firebase.auth().onAuthStateChanged(function(user)
+                {
+                    if (user) {
+                        window.location.href = "index.html";
+                    }
+                });
+            </script>
+    </body>
+</html>

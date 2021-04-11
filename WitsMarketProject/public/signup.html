@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Sign-up Market place</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="./style.css">
+
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-storage.js"></script>
+    </head>
+    <body>
+        <main>
+            <form>
+                <h3 style="text-align: center;">Register</h3>
+                <label for="fName">First Name:</label><br>
+                <input placeholder="e.g: James" type="text" name="fName" id="fName"><br>
+                <label for="lName">Last Name:</label><br>
+                <input placeholder="e.g: Bond" type="text" name="lName" id="lName"><br>
+                <label for="dob">Date of birth:</label>
+                <input type="date" id="dob" name="dob"><br><br>
+                <label for="email">Email:</label><br>
+                <input placeholder="e.g: example@gmail.com" type="text" name="email" id="email"><br>
+                <label for="password">Password:</label><br>
+                <input placeholder="e.g: abcdef" type="password" name="password" id="password"><br>
+                <label for="cPassword">Confirm Password:</label><br>
+                <input placeholder="e.g: abcdef" type="password" name="cPassword" id="cPassword"><br>
+                <button type="button" class="btn waves-effect waves-light" onclick="register()">Register</button><br>
+                <a href="signin.html">Already have an account?</a>
+            </form>
+        </main>
+
+        <script src="index.js"></script>
+        <script>
+            // firebase.auth().onAuthStateChanged(function(user){
+            //     if (user) {
+            //         //window.location.href = "index.html";
+            //     }
+            // });
+        </script>
+    </body>
+</html>
