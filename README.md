@@ -9,6 +9,8 @@ Market place is a web-based application that intends to function similarly to we
 
 For our full documentation check out the project [Wiki](https://github.com/2109688/Market-place/wiki)
 
+We have documentation detailing the usage of our system here [Getting Started](https://github.com/2109688/Market-place/wiki/Getting-Started) and after you've created your account we have documentation detailing the usage of the [Homepage](https://github.com/2109688/Market-place/wiki/Home-Page)
+
 ## Installing
 This system was built using JavaScript, HTML and CSS. 
 
