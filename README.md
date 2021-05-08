@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/2153068/test.svg?branch=master)](https://travis-ci.com/2153068/test)
+
 # Market place
 _Group 2 software design project_
 
