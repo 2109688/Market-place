@@ -292,34 +292,31 @@
           const dbRef = firebase.database().ref();
           dbRef.child("prodcutCategory").once("value", function(data) {
             var category = data.val();  //all prodcuts object
-            var i = 0;
-            for(var categoryName in category){
-              var categoryValue = categoryName;
 
-              //html
-              let row = document.createElement("div");
-              row.className = "row";
+            var categoryN = new URL(location.href).searchParams.get("category");
+            var categoryName = categoryN;
+            var categoryValue = categoryName;
 
-              const container = document.getElementById("container");
-            
-              let prodcutCategoryH = document.createElement("div");
-              prodcutCategoryH.className = "heading_container heading_center";
+            //html
+            let row = document.createElement("div");
+            row.className = "row";
 
-              let prodcutCategory = document.createElement("h2");
-              prodcutCategory.textContent = categoryValue;
-              prodcutCategoryH.append(prodcutCategory);
+            const container = document.getElementById("container");
+        
+            let prodcutCategoryH = document.createElement("div");
+            prodcutCategoryH.className = "heading_container heading_center";
 
-              container.append(prodcutCategoryH);
+            let prodcutCategory = document.createElement("h2");
+            prodcutCategory.textContent = categoryValue;
+            prodcutCategoryH.append(prodcutCategory);
 
-              var j = 0;
+            container.append(prodcutCategoryH);
 
-              //just for meantime
-              var k = -1;
-              for(var prodcutId in category[categoryName]){
-                if(j>=3){
-                  break;
-                }
+            var j = 0;
 
+            //just for meantime
+            var k = -1;
+            for(var prodcutId in category[categoryName]){
                 //data from firebase
                 var nameValue = category[categoryName][prodcutId].name;
                 var priceValue = category[categoryName][prodcutId].price;
@@ -349,12 +346,11 @@
                     k=0;
                 }
                 var idN = "/id" + k;
-                
-                // storageRef.child('productCategory/'+categoryValue+'/id0'+ "/image0" + '.jpg').getDownloadURL().then(function(url) {
+
                 storageRef.child('productCategory/'+categoryValue+ idN+ "/image0" + '.jpg').getDownloadURL().then(function(url) {
-                  // img.src = "images/p1.png";
-                  img.src = url;
-                  img.alt = "";
+                    // img.src = "images/p1.png";
+                    img.src = url;
+                    img.alt = "";
                 });
 
                 // let img = document.createElement("img");
@@ -375,7 +371,7 @@
                 //modal
                 let divModalF = document.createElement("div");
                 divModalF.className = "modal fade";
-                divModalF.id = "myModal"+ i+""+ j;
+                divModalF.id = "myModal"+ j;
 
                 let divModalD = document.createElement("div");
                 divModalD.className = "modal-dialog";
@@ -406,9 +402,9 @@
                 //get Picture icons for modal
                 let image = document.createElement("img"); 
                 storageRef.child('productCategory/'+categoryValue+idN+ "/image0" + '.jpg').getDownloadURL().then(function(url) {
-                  // img.src = "images/p1.png"; 
-                  image.src = url;
-                  image.alt = "";
+                    // img.src = "images/p1.png"; 
+                    image.src = url;
+                    image.alt = "";
                 });
                 // image.src = "images/p1.png";
                 image.alt="Trulli";
@@ -458,7 +454,7 @@
                 divDetailed.className = "detail-box";
                 divDetailed.href = "";
                 
-                var s = "#myModal"+i+""+j;
+                var s = "#myModal"+j;
                 //for modal
                 divDetailed.setAttribute('data-toggle', "modal");
                 divDetailed.setAttribute('data-target', s);
@@ -501,25 +497,9 @@
                 divCol.append(divModalF);  //modal
                 row.append(divCol);
                 j++;
-              }
-              //html
-              container.append(row);
-
-              let divBtn = document.createElement("div");
-              divBtn.className = "btn_box";
-
-              let aView = document.createElement("a");
-              var nextPage = "viewAll.html";
-              var str = "?category=" + categoryValue;
-              aView.href = nextPage + str;
-              aView.className = "view_more-link";
-              aView.textContent = "View All";
-              divBtn.append(aView);
-
-              container.append(divBtn);
-
-              i++
             }
+            //html
+            container.append(row);
           });
 
         </script>

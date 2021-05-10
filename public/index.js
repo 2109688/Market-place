@@ -33,42 +33,47 @@ function register(){
   var fName = document.getElementById("fName").value;
   var lName = document.getElementById("lName").value;
   var dob = document.getElementById("dob").value;
-  var dob = document.getElementById("dob").value;
   var email = document.getElementById("email").value;
   var password = document.getElementById("password").value;
   var cPassword = document.getElementById("cPassword").value;
 
   if(password == cPassword){
-    firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
-      // Signed in 
-      var user = userCredential.user.uid;
-      var rootRef = firebase.database().ref();
-      var usersRef = rootRef.child("users").child(user);
-      var userData = 
-      {
-        firstName: fName,
-        lastName: lName,
-        dateOfBirth: dob,
-        email: email
-      };
-      usersRef.set(userData, function(error){
-        if(error){
-          var errorCode = error.code;
-          var errorMessage = error.message;
-
-          window.alert("Message : " + errorMessage);
-        }
-        else{
-          window.location.href = "index.html";
-        }
+    if(fName!= "" && lName != "" && dob != ""){
+      firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
+        // Signed in 
+        var user = userCredential.user.uid;
+        var rootRef = firebase.database().ref();
+        var usersRef = rootRef.child("users").child(user);
+        var userData = 
+        {
+          firstName: fName,
+          lastName: lName,
+          dateOfBirth: dob,
+          email: email
+        };
+        usersRef.set(userData, function(error){
+          if(error){
+            var errorCode = error.code;
+            var errorMessage = error.message;
+  
+            window.alert("Message : " + errorMessage);
+          }
+          else{
+            window.location.href = "index.html";
+          }
+        });
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        window.alert(errorMessage)
+        // ..
       });
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      window.alert(errorMessage)
-      // ..
-    });
+    }
+    else{
+      window.alert("Please enter all fields!")
+    }
+    
   }
   else{
     window.alert("Passwords do not match.");
@@ -82,4 +87,7 @@ function logout(){
     // An error happened.
   });
 }
+
+// document.getElementById("i").innerHTML = 23;
+
   
