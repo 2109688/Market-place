@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="./cart.css">
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet"> <!-- range slider -->
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+
+  <!-- bootstrap styles -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- for Firebase -->
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-storage.js"></script>
+
+<!-- To connect to Firebase database -->
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyBmJqjAXztETX4Dh4vEetlB4QzN9uqReYA",
+    authDomain: "witsmarketproject.firebaseapp.com",
+    databaseURL: "https://witsmarketproject-default-rtdb.firebaseio.com",
+    projectId: "witsmarketproject",
+    storageBucket: "witsmarketproject.appspot.com",
+    messagingSenderId: "650642470600",
+    appId: "1:650642470600:web:49fe3a262e6ca122b597fd",
+    measurementId: "G-EHXK572PE1"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.auth.Auth.Persistence.LOCAL;
+</script>
+
+</head>
+<body>
+    <header class="header_section">
+        <div class="header_top">
+            <div class="container-fluid">
+                <div class="top_nav_container">
+                <from class="search_form">
+                </from>
+                    <div class="user_option_box">
+                        <a href="" class="account-link">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <span >
+                            <a onclick="logout()" href="#">Logout</a>
+                        </span>
+                        </a>
+                        <a href="" class="cart-link">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <span>
+                            <a onclick href="cart.html">Cart</a>
+                        </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header_bottom">
+          <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+              <a class="navbar-brand" href="index.html">
+                <span>
+                  Wits Market Place
+                </span>
+              </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class=""> </span>
+              </button>
+            </nav>
+          </div>
+        </div>
+    </header>
+
+
+
+<!-- partial:index.partial.html -->
+<h1 style="padding: 0px 30px 30px 20px;">Shopping Cart</h1>
+
+<div class="shopping-cart" id="shopping_cart">
+
+  <div class="column-labels">
+    <label class="product-image">Image</label>
+    <label class="product-details">Product</label>
+    <label class="product-price">Price</label>
+    <label class="product-quantity">Quantity</label>
+    <label class="product-removal">Remove</label>
+    <label class="product-line-price">Total</label>
+  </div>
+
+  <script>
+
+    for(var i=0; i< 5; i++){
+        let divProduct = document.createElement("div");
+        divProduct.className = "product";
+
+        let divProduct_image = document.createElement("div");
+        divProduct_image.className = "product-image";
+
+        let img = document.createElement("img");
+        img.src = "https://s.cdpn.io/3/dingo-dog-bones.jpg";
+
+        divProduct_image.append(img);
+        divProduct.append(divProduct_image);
+
+        let divProductDetails = document.createElement("div");
+        divProductDetails.className = "product-details";
+
+        let divProductTitle = document.createElement("div");
+        divProductTitle.className = "product-title";
+        divProductTitle.textContent = "product name";
+
+        let pProductDescription = document.createElement("p");
+        pProductDescription.className = "product-description";
+        pProductDescription.textContent = "product description";
+
+        divProductDetails.append(divProductTitle);
+        divProductDetails.append(pProductDescription);
+        divProduct.append(divProductDetails);
+
+        let divProductPrice = document.createElement("div");
+        divProductPrice.className = "product-price";
+        divProductPrice.textContent = "product price";
+
+        let divProductQuantity = document.createElement("div");
+        divProductQuantity.className = "product-quantity";
+
+        let inputNumber = document.createElement("input");
+        inputNumber.type = "number"
+        inputNumber.value = 2;
+        inputNumber.min = 1;
+
+        divProductQuantity.append(inputNumber);
+        divProduct.append(divProductPrice);
+        divProduct.append(divProductQuantity);
+
+        let divProductRemoval = document.createElement("div");
+        divProductRemoval.className = "product-removal";
+
+        let btnRemoveProduct = document.createElement("button");
+        btnRemoveProduct.className = "remove-product";
+        btnRemoveProduct.textContent = "Remove";
+
+        divProductRemoval.append(btnRemoveProduct);
+        divProduct.append(divProductRemoval);
+
+        let divProductLinePrice = document.createElement("div");
+        divProductLinePrice.className = "product-line-price";
+        divProductLinePrice.textContent = "price value";
+
+        divProduct.append(divProductLinePrice);
+
+
+
+
+        const shopping_cart = document.getElementById("shopping_cart");
+        shopping_cart.append(divProduct);
+    }
+    
+
+  </script>
+
+  <!-- <div class="product">
+    <div class="product-image">
+      <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
+    </div>
+    <div class="product-details">
+      <div class="product-title">Dingo Dog Bones</div>
+      <p class="product-description">The best dog bones of all time. Holy crap. Your dog will be begging for these things! I got curious once and ate one myself. I'm a fan.</p>
+    </div>
+    <div class="product-price">12.99</div>
+    <div class="product-quantity">
+      <input type="number" value="2" min="1">
+    </div>
+    <div class="product-removal">
+      <button class="remove-product">
+        Remove
+      </button>
+    </div>
+    <div class="product-line-price">25.98</div>
+  </div>
+
+  <div class="product">
+    <div class="product-image">
+      <img src="https://s.cdpn.io/3/large-NutroNaturalChoiceAdultLambMealandRiceDryDogFood.png">
+    </div>
+    <div class="product-details">
+      <div class="product-title">Nutro™ Adult Lamb and Rice Dog Food</div>
+      <p class="product-description">Who doesn't like lamb and rice? We've all hit the halal cart at 3am while quasi-blackout after a night of binge drinking in Manhattan. Now it's your dog's turn!</p>
+    </div>
+    <div class="product-price">45.99</div>
+    <div class="product-quantity">
+      <input type="number" value="1" min="1">
+    </div>
+    <div class="product-removal">
+      <button class="remove-product">
+        Remove
+      </button>
+    </div>
+    <div class="product-line-price">45.99</div>
+  </div> -->
+
+  <div class="totals">
+    <div class="totals-item">
+      <label>Total</label>
+      <div class="totals-value" id="cart-total">71.97</div>
+    </div>
+  </div>
+      
+      <button class="checkout">Checkout</button>
+
+</div>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="./cart.js"></script>
+
+    <!-- jQery -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.js"></script>
+    <!-- custom js -->
+    <script src="js/custom.js"></script>
+
+
+    <script src="index.js"></script> 
+    <script>
+        firebase.auth().onAuthStateChanged(function(user)
+        {
+            if (!user) {
+                window.location.href = "signin.html";
+            }
+        });
+    </script>
+
+</body>
+</html>
