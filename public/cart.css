@@ -158,6 +158,9 @@ Side note: I know that this style of nesting in SASS doesn't result in the most 
     color: #fff;
     font-size: 25px;
     border-radius: 3px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
   }
   
   .checkout:hover {

@@ -59,7 +59,6 @@
   </head>
 
   <body>
-
     <!-- welcome section -->
     <!-- <div class="hero_area"> -->  
       <!-- header section strats -->
@@ -67,20 +66,10 @@
         <div class="header_top">
           <div class="container-fluid">
             <div class="top_nav_container">
-              <!-- <div class="contact_nav">
-                <a href="">
-                  <i class="fa fa-phone" aria-hidden="true"></i>
-                  <span>
-                    Call : +01 some number
+              <div class="contact_nav">
+                  <span style="color: white;" id="fName">
                   </span>
-                </a>
-                <a href="">
-                  <i class="fa fa-envelope" aria-hidden="true"></i>
-                  <span>
-                    Email : softwaredesigngroup2@gmail.com
-                  </span>
-                </a>
-              </div> -->
+              </div>
               <from class="search_form">
                 <!-- search section -->
                 <!-- <input type="text" class="form-control" placeholder="Search here...">
@@ -270,7 +259,7 @@
             // var categories = ["Technology", "Clothes", "Games", "Sports", "Food"]
             // for(var i =0; i <5; i++){
             //   for(var j =0; j<15; j++){
-            //     writeToFirebase(categories[i], "id"+j, "product "+j, "R1000", "descrption "+j, 5, "image"+j)
+            //     writeToFirebase(categories[i], "id"+j, "product "+j, "1000", "descrption "+j, 100000, "image"+j)
             //   }
             // }
             
@@ -357,14 +346,27 @@
                   // img.src = "images/p1.png";
                   // img.alt = "";
 
-                  let aAdd = document.createElement("a");
+                  categoryArray = ["Clothes", "Food", "Games", "Sports", "Technology"];
+
+                  // window.alert(categoryValue);
+                  var categoryId;
+                  for(var i=1; i<categoryArray.length+1; i++){
+                    if(categoryValue == categoryArray[i-1]){
+                      categoryId = i*100;
+                      break;
+                    }
+                  }
+                  // window.alert(categoryId);
+                  let aAdd = document.createElement("button");
                   aAdd.className = "add_cart_btn";
-                  aAdd.href = "";
+                  aAdd.textContent = "Add To Cart";
+                  aAdd.setAttribute("onclick", "cartToFirebase("+categoryId+k+")");
 
-                  let spanAddCart = document.createElement("span");
-                  spanAddCart.textContent = "Add To Cart";
 
-                  aAdd.append(spanAddCart)
+                  // let spanAddCart = document.createElement("span");
+                  // spanAddCart.textContent = "Add To Cart";
+
+                  // aAdd.append(spanAddCart)
                   divImgBox.append(img);
                   divImgBox.append(aAdd);
 
@@ -424,6 +426,20 @@
                   // btnModalAdd.className = "close";
                   btnModalAdd.setAttribute('data-dismiss', "modal");
                   btnModalAdd.innerHTML = "Add To Cart";
+
+                  categoryArray = ["Clothes", "Food", "Games", "Sports", "Technology"];
+
+                  // window.alert(categoryValue);
+                  var categoryId;
+                  for(var i=1; i<categoryArray.length+1; i++){
+                    if(categoryValue == categoryArray[i-1]){
+                      categoryId = i*100;
+                      break;
+                    }
+                  }
+                  // aAdd.setAttribute("onclick", "cartToFirebase("+categoryId+k+")");
+
+                  btnModalAdd.setAttribute("onclick", "cartToFirebase("+categoryId+k+")");
 
                   divModalB.append(image);
                   divModalB.append(pPrice);
@@ -865,12 +881,18 @@
     <script>
         firebase.auth().onAuthStateChanged(function(user)
         {
-            if (!user) {
-                window.location.href = "signin.html";
-            }
+          if (!user) {
+              window.location.href = "signin.html";
+          }
+          else{
+            const dbRef = firebase.database().ref();
+            dbRef.child("users").child(user.uid).child("details").child("firstName").once("value", function(data) {
+              var name = data.val();  
+              document.getElementById("fName").innerHTML ="Hi " + name;
+            });
+          }
         });
     </script>
-
 
   </body>
 
